@@ -89,6 +89,19 @@ server.post('/users', getNextId, async (req, res) => {
             result: 'dados não foram inseridos'
         });
     }
+});
+
+server.delete('/users/:id', async (req,res) => {
+    const {id} = req.params;
+
+    await database.query(`DELETE FROM users WHERE id =${id};`,
+    {type : database.QueryTypes.DELETE})
+    .then(result =>{
+        return res.json(result);
+    })
+    .catch(error =>{
+        return res.json(error);
+    })
 })
 
 server.listen(process.env.PORT);
