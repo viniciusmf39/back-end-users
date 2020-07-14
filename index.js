@@ -95,13 +95,12 @@ server.delete('/users/:id', async (req,res) => {
     const {id} = req.params;
 
     await database.query(`DELETE FROM users WHERE id =${id};`,
-    {type : database.QueryTypes.DELETE})
-    .then(result =>{
-        return res.json(result);
-    })
-    .catch(error =>{
+        {type : database.QueryTypes.DELETE})
+        .catch(error =>{
         return res.json(error);
-    })
+    });
+    return res.json({result:'usuario deletado com sucesso'})
+   
 })
 
 server.listen(process.env.PORT);
